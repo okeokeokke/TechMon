@@ -73,7 +73,7 @@ class BattleViewController: UIViewController {
 //            finishBattle(vanishImageView: enemyImageView, isPlayerWin: true)
 //        }
 //    }
-    @objc  func updateGame() {
+    @objc func updateGame() {
         playerMP += 1
         if playerMP >= 20 {
             isPlayerAttackAvailable = true
@@ -111,7 +111,7 @@ class BattleViewController: UIViewController {
         var finishMessage: String = ""
         if isPlayerWin {
             techMonManager.playSE(fileName: "SE_fanfare")
-            finishMessage = "勇者の勝利"
+            finishMessage = "勇者の勝利！！"
         } else {
             techMonManager.playSE(fileName: "SE_gameover")
             finishMessage = "勇者の敗北…"
