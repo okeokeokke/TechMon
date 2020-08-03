@@ -24,21 +24,22 @@ class BattleViewController: UIViewController {
     var enemyMP = 0
     var gameTimer: Timer!
     var isPlayerAttackAvailable: Bool = true
-//    var player: Character!
-//    var enemy: Character!
+    var player: Character!
+    var enemy: Character!
     
 
     override func viewDidLoad() {
-        playerNameLabel.text = "勇者"
-        playerImageView.image = UIImage(named: "yusya.png")
-        playerHPLabel.text = "\(playerHP) / 100"
-        playerMPLabel.text = "\(playerMP) / 20"
-        enemyNameLabel.text = "龍"
-        enemyImageView.image = UIImage(named: "monster.png")
-        enemyHPLabel.text = "\(enemyHP) / 200"
-        enemyMPLabel.text = "\(enemyMP) / 35"
-//        player = techMonManager.player
-//        enemy = techMonManager.player
+//        playerNameLabel.text = "勇者"
+//        playerImageView.image = UIImage(named: "yusya.png")
+//        playerHPLabel.text = "\(playerHP) / 100"
+//        playerMPLabel.text = "\(playerMP) / 20"
+//        enemyNameLabel.text = "龍"
+//        enemyImageView.image = UIImage(named: "monster.png")
+//        enemyHPLabel.text = "\(enemyHP) / 200"
+//        enemyMPLabel.text = "\(enemyMP) / 35"
+        player = techMonManager.player
+        enemy = techMonManager.player
+        print("キャラの読み込み完了")
         
         gameTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateGame), userInfo: nil, repeats: true)
         gameTimer.fire()
@@ -59,37 +60,38 @@ class BattleViewController: UIViewController {
         techMonManager.stopBGM()
     }
     
-//    func updateUI() {
-//        playerHPLabel.text = "\(player.currentHP) / \(player.maxHP)"
-//        playerMPLabel.text = "\(player.currentMP) / \(player.maxMP)"
-//        enemyHPLabel.text = "\(enemy.currentHP) / \(enemy.maxHP)"
-//        enemyMPLabel.text = "\(enemy.currentMP) / \(enemy.maxMP)"
-//    }
+    func updateUI() {
+        playerHPLabel.text = "\(player.currentHP) / \(player.maxHP)"
+        playerMPLabel.text = "\(player.currentMP) / \(player.maxMP)"
+        enemyHPLabel.text = "\(enemy.currentHP) / \(enemy.maxHP)"
+        enemyMPLabel.text = "\(enemy.currentMP) / \(enemy.maxMP)"
+    }
     
-//    func judgeBattle() {
-//        if player.currentHP <= 0 {
-//            finishBattle(vanishImageView: playerImageView, isPlayerWin: false)
-//        } else if enemy.currentHP <=  0 {
-//            finishBattle(vanishImageView: enemyImageView, isPlayerWin: true)
-//        }
-//    }
+    func judgeBattle() {
+        if player.currentHP <= 0 {
+            finishBattle(vanishImageView: playerImageView, isPlayerWin: false)
+        } else if enemy.currentHP <=  0 {
+            finishBattle(vanishImageView: enemyImageView, isPlayerWin: true)
+        }
+    }
     @objc func updateGame() {
-        playerMP += 1
-        if playerMP >= 20 {
+        player.currentMP += 1
+        if player.currentMP >= 20 {
             isPlayerAttackAvailable = true
-            playerMP = 20
+            player.currentMP = 20
         } else {
             isPlayerAttackAvailable = false
         }
         
-        enemyMP += 1
-        if enemyMP >= 35 {
+        enemy.currentMP += 1
+        if enemy.currentMP >= 35 {
             enemyAttack()
-            enemyMP = 0
+            enemy.currentMP = 0
         }
         
-        playerMPLabel.text = "\(playerMP) / 20"
-        enemyMPLabel.text = "\(enemyMP) / 35"
+        
+//        playerMPLabel.text = "\(playerMP) / 20"
+//        enemyMPLabel.text = "\(enemyMP) / 35"
         
     }
     
